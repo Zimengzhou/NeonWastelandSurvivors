@@ -7,11 +7,11 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.daostudio.nihongSurvivors.Components.PositionComponent;
 import com.daostudio.nihongSurvivors.Components.VelocityComponent;
 
-public class MovementSys extends IteratingSystem {
+public class MovementSystem extends IteratingSystem {
     private ComponentMapper<PositionComponent> Pm = ComponentMapper.getFor(PositionComponent.class);
     private ComponentMapper<VelocityComponent> Vm = ComponentMapper.getFor(VelocityComponent.class);
 
-    public MovementSys() {
+    public MovementSystem() {
         super(Family.all(
             PositionComponent.class,
             VelocityComponent.class

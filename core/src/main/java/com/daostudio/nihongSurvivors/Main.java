@@ -4,15 +4,14 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Graphics;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.daostudio.nihongSurvivors.Components.PositionComponent;
 import com.daostudio.nihongSurvivors.Components.TextureComponent;
 import com.daostudio.nihongSurvivors.Components.VelocityComponent;
-import com.daostudio.nihongSurvivors.Systems.MovementSys;
+import com.daostudio.nihongSurvivors.Systems.DrawSystem;
+import com.daostudio.nihongSurvivors.Systems.MovementSystem;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Main extends ApplicationAdapter {
@@ -20,7 +19,7 @@ public class Main extends ApplicationAdapter {
     private Texture image;
 
     Engine engine = new Engine(); // ECS框架的核心
-    MovementSys movementSystem = new MovementSys();
+    MovementSystem movementSystem = new MovementSystem();
     Entity entity_image = new Entity(); //测试entity
 
     @Override
@@ -33,6 +32,7 @@ public class Main extends ApplicationAdapter {
 
         engine.addEntity(entity_image); //测试entity加入engine
         engine.addSystem(movementSystem);
+        engine.addSystem(new DrawSystem(batch));
     }
 
     @Override
@@ -40,13 +40,12 @@ public class Main extends ApplicationAdapter {
         ScreenUtils.clear(0f, 0f, 0f, 1f);
         batch.begin();
         engine.update(Gdx.graphics.getDeltaTime());
-//        batch.draw(image, Gdx.graphics.getWidth()/2f, Gdx.graphics.getHeight()/2f);
+
         batch.end();
     }
 
     @Override
     public void dispose() {
         batch.dispose();
-        image.dispose();
     }
 }
