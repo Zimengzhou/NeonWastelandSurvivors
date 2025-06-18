@@ -9,6 +9,10 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.daostudio.nihongSurvivors.Components.PositionComponent;
+import com.daostudio.nihongSurvivors.Components.TextureComponent;
+import com.daostudio.nihongSurvivors.Components.VelocityComponent;
+import com.daostudio.nihongSurvivors.Systems.MovementSys;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Main extends ApplicationAdapter {
@@ -16,19 +20,27 @@ public class Main extends ApplicationAdapter {
     private Texture image;
 
     Engine engine = new Engine(); // ECS框架的核心
+    MovementSys movementSystem = new MovementSys();
     Entity entity_image = new Entity(); //测试entity
 
     @Override
     public void create() {
         batch = new SpriteBatch();
-        image = new Texture("libgdx.png");
+
+        entity_image.add(new PositionComponent());
+        entity_image.add(new VelocityComponent());
+        entity_image.add(new TextureComponent("libgdx.png"));
+
+        engine.addEntity(entity_image); //测试entity加入engine
+        engine.addSystem(movementSystem);
     }
 
     @Override
     public void render() {
         ScreenUtils.clear(0f, 0f, 0f, 1f);
         batch.begin();
-        batch.draw(image, Gdx.graphics.getWidth()/2f, Gdx.graphics.getHeight()/2f);
+        engine.update(Gdx.graphics.getDeltaTime());
+//        batch.draw(image, Gdx.graphics.getWidth()/2f, Gdx.graphics.getHeight()/2f);
         batch.end();
     }
 
