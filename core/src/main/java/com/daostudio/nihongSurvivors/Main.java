@@ -1,5 +1,7 @@
 package com.daostudio.nihongSurvivors;
 
+import com.badlogic.ashley.core.Engine;
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics;
@@ -12,6 +14,9 @@ import com.badlogic.gdx.utils.ScreenUtils;
 public class Main extends ApplicationAdapter {
     private SpriteBatch batch;
     private Texture image;
+
+    Engine engine = new Engine(); // ECS框架的核心
+    Entity entity_image = new Entity(); //测试entity
 
     @Override
     public void create() {
