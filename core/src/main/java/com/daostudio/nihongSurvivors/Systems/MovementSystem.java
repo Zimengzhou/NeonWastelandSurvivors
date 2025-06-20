@@ -12,15 +12,13 @@ public class MovementSystem extends IteratingSystem {
     public MovementSystem() {
         super(Family.all(
             TransformComponent.class
-        ).get());
+        ).get(), 1);
     }
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         TransformComponent transform = Pm.get(entity);
-
         transform.position.add(transform.velocity.x*deltaTime, transform.velocity.y*deltaTime);
-
 
     }
 }

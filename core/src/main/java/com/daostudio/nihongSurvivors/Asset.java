@@ -8,6 +8,7 @@ public class Asset {
 
     public static void load() {
         assetManager.load("libgdx.png", Texture.class);
+        assetManager.load("fatiaojishi_.png", Texture.class);
 
         assetManager.finishLoading();
     }

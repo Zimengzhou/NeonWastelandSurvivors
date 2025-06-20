@@ -6,7 +6,10 @@ import com.badlogic.ashley.core.Component;
 public class StatsComponent implements Component {
     public int HP = 100;
     public int maxHP = 100;
+
     public int armor = 0;
     public float dodgeChance = 0;
     public int damageReduce;
+
+    public float velocity;//移速
 }
