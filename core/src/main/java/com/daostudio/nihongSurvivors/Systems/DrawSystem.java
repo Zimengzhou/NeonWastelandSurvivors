@@ -5,9 +5,7 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.daostudio.nihongSurvivors.Components.TransformComponent;
 import com.daostudio.nihongSurvivors.Components.TextureComponent;
 
@@ -25,8 +23,7 @@ public class DrawSystem extends IteratingSystem {
     protected void processEntity(Entity entity, float deltaTime) {
         TextureComponent texture = textureComponentMapper.get(entity);
         TransformComponent transform = transformComponentMapper.get(entity);
-        batch.draw(texture.texture, transform.position.x, transform.position.y, transform.rotateOx, transform.rotateOy,
-                texture.texture.getWidth(), texture.texture.getHeight(), transform.scale, transform.scale, transform.rotate,
-                0,0,texture.texture.getWidth(), texture.texture.getHeight(),false,false);
+        batch.draw(texture.textureRegion, transform.position.x, transform.position.y, transform.rotateOx, transform.rotateOy,
+                texture.textureRegion.getRegionWidth(), texture.textureRegion.getRegionHeight(), transform.scale, transform.scale, transform.rotate);
     }
 }

@@ -3,12 +3,10 @@ package com.daostudio.nihongSurvivors;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.daostudio.nihongSurvivors.Components.PlayerTagComponent;
-import com.daostudio.nihongSurvivors.Components.StatsComponent;
-import com.daostudio.nihongSurvivors.Components.TextureComponent;
-import com.daostudio.nihongSurvivors.Components.TransformComponent;
+import com.daostudio.nihongSurvivors.Components.*;
 
 public class EntityFactory {
     private final Engine engine;
@@ -33,11 +31,18 @@ public class EntityFactory {
         stats.HP = 20;
         stats.maxHP = 20;
         stats.dodgeChance = 0;
-        stats.velocity = 200f;
+        stats.velocity = 189f;
         player.add(stats);
 
-        TextureComponent texture = new TextureComponent("fatiaojishi_.png");
+        TextureComponent texture = new TextureComponent("heroes/fatiaojishi_animation.png");
         player.add(texture);
+
+        AnimationComponent animationComponent = new AnimationComponent();
+        TextureRegion[][] tempRegions = TextureRegion.split(Asset.assetManager.get("heroes/fatiaojishi_animation.png", Texture.class), 100, 100);
+        TextureRegion[] regions = new TextureRegion[5];
+        System.arraycopy(tempRegions[0], 0, regions, 0, 5);
+        animationComponent.currentAnim = new Animation<>(0.15f, regions);
+        player.add(animationComponent);
 
         engine.addEntity(player);
         return player;

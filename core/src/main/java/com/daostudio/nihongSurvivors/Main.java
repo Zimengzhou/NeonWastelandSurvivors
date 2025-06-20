@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.daostudio.nihongSurvivors.Components.TransformComponent;
 import com.daostudio.nihongSurvivors.Components.TextureComponent;
+import com.daostudio.nihongSurvivors.Systems.AnimationSystem;
 import com.daostudio.nihongSurvivors.Systems.DrawSystem;
 import com.daostudio.nihongSurvivors.Systems.MovementSystem;
 import com.daostudio.nihongSurvivors.Systems.PlayerControlSystem;
@@ -35,11 +36,12 @@ public class Main extends ApplicationAdapter {
         camera.position.set(camera.viewportWidth/2f, camera.viewportHeight/2f, 0);
         Asset.load();
 
-        Entity player = entityFactory.createPlayer(0, 0);
+        Entity player = entityFactory.createPlayer(0.27f, 0);
 
 
         engine.addSystem(movementSystem);
         engine.addSystem(new PlayerControlSystem());
+        engine.addSystem(new AnimationSystem());
         engine.addSystem(new DrawSystem(batch));
     }
 
