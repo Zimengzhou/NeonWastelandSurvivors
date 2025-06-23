@@ -7,14 +7,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.daostudio.nihongSurvivors.Components.AllComponentsMap;
 import com.daostudio.nihongSurvivors.Components.PlayerTagComponent;
 import com.daostudio.nihongSurvivors.Components.StatsComponent;
 import com.daostudio.nihongSurvivors.Components.TransformComponent;
 
 public class PlayerControlSystem extends EntitySystem implements InputProcessor {
     private ImmutableArray<Entity> entities;
-    private final ComponentMapper<TransformComponent> transformComponentMapper = ComponentMapper.getFor(TransformComponent.class);
-    private final ComponentMapper<StatsComponent> statsComponentMapper = ComponentMapper.getFor(StatsComponent.class);
     boolean up, down, right, left;
 
     @Override
@@ -25,8 +24,8 @@ public class PlayerControlSystem extends EntitySystem implements InputProcessor 
     @Override
     public void update(float deltaTime) {
         for (Entity entity:entities) {
-            TransformComponent transform = transformComponentMapper.get(entity);
-            StatsComponent stats = statsComponentMapper.get(entity);
+            TransformComponent transform = AllComponentsMap.transformComponentMapper.get(entity);
+            StatsComponent stats = AllComponentsMap.statsComponentMapper.get(entity);
 
             transform.velocity.set(0, 0);
             if (up) { transform.velocity.y = 1; }

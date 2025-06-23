@@ -9,6 +9,7 @@ public class TextureComponent implements Component {
     public TextureRegion textureRegion;
 
     public TextureComponent(String internalPath) {
-        textureRegion = new TextureRegion(Asset.assetManager.get(internalPath, Texture.class));
+        if(internalPath != null)
+            textureRegion = new TextureRegion(Asset.assetManager.get(internalPath, Texture.class));
     }
 }
