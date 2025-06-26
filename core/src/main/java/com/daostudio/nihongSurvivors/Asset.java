@@ -18,6 +18,7 @@ public class Asset {
         textureParameter.genMipMaps = true;
         assetManager.load("libgdx.png", Texture.class);
         assetManager.load("heroes/fatiaojishi_animation.png", Texture.class, textureParameter);
+        assetManager.load("attack/sf_attack.png", Texture.class, textureParameter);
 
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         assetManager.load("map/map1.tmx", TiledMap.class);

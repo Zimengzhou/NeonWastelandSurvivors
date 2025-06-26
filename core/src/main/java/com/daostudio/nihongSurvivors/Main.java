@@ -23,10 +23,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.daostudio.nihongSurvivors.Components.AllComponentsMap;
-import com.daostudio.nihongSurvivors.Components.PlayerTagComponent;
-import com.daostudio.nihongSurvivors.Components.TransformComponent;
-import com.daostudio.nihongSurvivors.Components.TextureComponent;
+import com.daostudio.nihongSurvivors.Components.*;
+import com.daostudio.nihongSurvivors.Skills.AttackSystem;
 import com.daostudio.nihongSurvivors.Systems.AnimationSystem;
 import com.daostudio.nihongSurvivors.Systems.DrawSystem;
 import com.daostudio.nihongSurvivors.Systems.MovementSystem;
@@ -46,6 +44,7 @@ public class Main extends ApplicationAdapter {
     MovementSystem movementSystem = new MovementSystem();
     EntityFactory entityFactory = new EntityFactory(engine);
     Entity player;
+    Entity enemy_1, enemy_2;
 
     @Override
     public void create() {
@@ -63,10 +62,18 @@ public class Main extends ApplicationAdapter {
 //        player = entityFactory.createPlayer(MathUtils.random(0, 8000), MathUtils.random(0, 4000));
         player = entityFactory.createPlayer(0, 0);
 
+        enemy_1 = entityFactory.createPlayer(200, 100);
+        enemy_1.remove(PlayerTagComponent.class);
+        enemy_2 = entityFactory.createPlayer(400, 600);
+        enemy_2.remove(PlayerTagComponent.class);
+        enemy_1.add(new EnemyTagComponent());
+        enemy_2.add(new EnemyTagComponent());
+
         engine.addSystem(movementSystem);
         engine.addSystem(new PlayerControlSystem());
         engine.addSystem(new AnimationSystem());
         engine.addSystem(new DrawSystem(batch));
+        engine.addSystem(new AttackSystem());
     }
 
     @Override
@@ -84,6 +91,7 @@ public class Main extends ApplicationAdapter {
         engine.update(Gdx.graphics.getDeltaTime());
 
         batch.end();
+//        Gdx.app.log("Main", "FPS: " + Gdx.graphics.getFramesPerSecond());
     }
 
     @Override
